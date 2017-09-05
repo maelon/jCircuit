@@ -8,7 +8,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'jCircuit.js',
-        publicPath: '/assets/', // string
+        publicPath: '', // string
         // the url to the output directory resolved relative to the HTML page
         library: 'jcircuit', 
         libraryTarget: 'umd',

@@ -8,10 +8,9 @@ const config = {
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'jCircuit.js',
-        publicPath: '/assets/', // string
-        // the url to the output directory resolved relative to the HTML page
+        publicPath: '',
         library: 'jcircuit', 
-        libraryTarget: 'umd',
+        libraryTarget: 'umd'
     },
 
     module: {
@@ -26,7 +25,7 @@ const config = {
                     }
                 }
             }
-        ],
+        ]
     },
 
     resolve: {
@@ -34,17 +33,15 @@ const config = {
             'node_modules',
             path.resolve(__dirname, '../src')
         ],
-        extensions: ['.js', '.json', '.jsx', '.css'],
+        extensions: ['.js', '.json'],
         alias: {
             'module': 'new-module',
-            // alias 'module' -> 'new-module' and 'module/path/file' -> 'new-module/path/file'
             'only-module$': 'new-module',
-            // alias 'only-module' -> 'new-module', but not 'module/path/file' -> 'new-module/path/file'
             'module': path.resolve(__dirname, 'app/third/module.js'),
-            // alias 'module' -> './app/third/module.js' and 'module/file' results in error
-            // modules aliases are imported relative to the current context
-        },
+        }
     },
+
+    plugins: [],
 
     performance: {
         hints: 'warning', // enum
@@ -60,7 +57,7 @@ const config = {
 
     context: __dirname,
 
-    stats: 'errors-only',
+    stats: 'errors-only'
 };
 
 module.exports = config;

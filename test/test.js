@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var jcircuit = require('../dist/jCircuit').default;
+var jcircuit = require('../dist/main.min').default;
 
 describe('jcircuit', function() {
     describe('hello', function() {

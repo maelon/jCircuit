@@ -15,12 +15,12 @@
  * The input starts process.
  * The output is called by process when it is done.
  * @class
-*/
+ */
 class Element {
     /**
      * Create an element.
      * @constructor
-    */
+     */
     constructor() {
     }
 
@@ -28,11 +28,25 @@ class Element {
      * @abstract
      * @param {*} data - The input data
      * @description After this will enter next process.
-    */
+     */
     input(data) {
+        throw new Error('must be implemented by subclass!');
     }
 
+    /**
+     * @abstract
+     * @return {Promise|undefined} - return a promise object for asynchronous process or undefined for synchronous.
+     */
     process() {
+        throw new Error('must be implemented by subclass!');
+    }
+
+    /**
+     * @abstract
+     * @return {*} data - The output data
+     */
+    output() {
+        throw new Error('must be implemented by subclass!');
     }
 }
 

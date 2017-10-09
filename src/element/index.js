@@ -26,8 +26,9 @@ class Element {
 
     /**
      * @abstract
-     * @param {*} data - The input data
-     * @description After this will enter next process.
+     * @param {*} data - The input data.
+     * @return {boolean} - Return true will enter next process or not will break.
+     * @description The entry of the element.
      */
     input(data) {
         throw new Error('must be implemented by subclass!');
@@ -35,7 +36,7 @@ class Element {
 
     /**
      * @abstract
-     * @return {Promise|undefined} - return a promise object for asynchronous process or undefined for synchronous.
+     * @return {Promise|undefined} - Return a promise object for asynchronous process or undefined for synchronous.
      */
     process() {
         throw new Error('must be implemented by subclass!');
@@ -43,7 +44,7 @@ class Element {
 
     /**
      * @abstract
-     * @return {*} data - The output data
+     * @return {*} data - The output data.
      */
     output() {
         throw new Error('must be implemented by subclass!');

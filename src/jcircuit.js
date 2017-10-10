@@ -5,35 +5,18 @@
 #  CreateTime: 2017-09-02 11:13
 # Description: jCircuit主类
 ===================================================================*/
-import 'babel-polyfill';
-
 'use strict';
+
+import Element from 'element/index';
 
 /**
 * jCircuit is a simple javascript framework.
 * It works like circuit.
 */
-class JCircuit {
-
-    /**
-    * @construcor
-    *
-    */
-    constructor() {
-    }
-
-    * _run() {
-        yield 1;
-        yield 2;
-        yield 3;
-    }
+class JCircuit extends Element {
+    static get Element() {
+        return Element;
+    };
 }
-
-const a = new JCircuit();
-const g = a._run();
-console.log(g.next());
-console.log(g.next());
-console.log(g.next());
-console.log(g.next());
 
 export default JCircuit;

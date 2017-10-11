@@ -13,10 +13,10 @@ import Element from 'element/index';
 * jCircuit is a simple javascript framework.
 * It works like circuit.
 */
-class JCircuit extends Element {
+class JCircuit {
     static get Element() {
         return Element;
-    };
+    }
 }
 
 export default JCircuit;

@@ -17,23 +17,60 @@ function _inherits(subClass, superClass) {
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-describe('jcircuit', function() {
-    describe('_run', function() {
-        var TestElement = function() { };
-        TestElement.prototype.input = function() {
-            console.log('input');
-        };
-        TestElement.prototype.process = function() {
-            console.log('process');
-        };
-        TestElement.prototype.output = function() {
-            console.log('output');
-        };
-        _inherits(TestElement, jCircuit.Element);
-        var o = new TestElement();
-        var go = o._run();
-        it('should return \'hello, world\' when the value is not present', function() {
-            assert.equal('hello, world', jcircuit());
-        });
+describe('_run normal', function() {
+    class TElement extends jCircuit.Element {
+        constructor() {
+            super();
+        }
+        input(data) {
+            return true;
+        }
+        process() {
+        }
+        output() {
+        }
+    }
+    var o = new TElement();
+    var go = o._run();
+    it('test input', function() {
+        assert.deepEqual({ value: true, done: false }, go.next());
+    });
+    it('test process', function() {
+        assert.deepEqual({ value: undefined, done: false }, go.next());
+    });
+    it('test output', function() {
+        assert.deepEqual({ value: undefined, done: true }, go.next());
+    });
+    it('test go on', function() {
+        assert.deepEqual({ value: undefined, done: true }, go.next());
+    });
+});
+
+describe('_run abnormal', function() {
+    class TElement extends jCircuit.Element {
+        constructor() {
+            super();
+        }
+        input(data) {
+            return false;
+        }
+        process() {
+        }
+        output() {
+        }
+    }
+    var o = new TElement();
+    var go = o._run();
+    it('test input', function() {
+        assert.deepEqual({ value: false, done: true }, go.next());
+    });
+    it('test process', function() {
+        assert.deepEqual({ value: undefined, done: true }, go.next());
+    });
+    it('test output', function() {
+        assert.deepEqual({ value: undefined, done: true }, go.next());
+    });
+    it('test go on', function() {
+        assert.deepEqual({ value: undefined, done: true }, go.next());
     });
 });

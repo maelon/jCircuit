@@ -57,15 +57,15 @@ class Element {
                 if(this._next === 'input') {
                     const whether = this.input(...arguments);
                     this._next = whether ? 'process' : 'done';
-                    return { 'value': undefined, 'done': whether }
+                    return { 'value': whether, 'done': !whether };
                 } else if(this._next === 'process') {
                     this._next = 'output';
-                    return { 'value': this.input(), 'done': false }
+                    return { 'value': this.process(), 'done': false };
                 } else if(this._next === 'output') {
-                    this._state = 'done';
-                    return { 'value': this.output(), 'done': true }
-                } else if(this._state === 'done') {
-                    return { 'value': undefined, 'done': true }
+                    this._next = 'done';
+                    return { 'value': this.output(), 'done': true };
+                } else if(this._next === 'done') {
+                    return { 'value': undefined, 'done': true };
                 }
             }
         };

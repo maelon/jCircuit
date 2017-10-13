@@ -5,7 +5,6 @@
 #  CreateTime: 2017-09-02 11:13
 # Description: jCircuit主类
 ===================================================================*/
-'use strict';
 
 import Element from 'element/index';
 

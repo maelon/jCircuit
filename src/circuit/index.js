@@ -8,4 +8,28 @@
                So, it has one input, output and process in the same way.
 ===================================================================*/
 
-'use strict'
+import Element from 'element/index';
+
+class Circuit extends Element {
+    constructor() {
+        super();
+    }
+
+    input(data) {
+        throw new Error('must be implemented by subclass!');
+    }
+
+    process() {
+        throw new Error('must be implemented by subclass!');
+    }
+
+    output() {
+        throw new Error('must be implemented by subclass!');
+    }
+
+    append(elements) {
+        throw new Error('must be implemented by subclass!');
+    }
+}
+
+export default Circuit;

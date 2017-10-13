@@ -6,8 +6,6 @@
 # Description: The base unit of jCircuit.
 ===================================================================*/
 
-'use strict';
-
 /**
  * The base unit of a circuit.
  * It's composed of input, output and process, like a electrical element.
@@ -23,6 +21,7 @@ class Element {
      */
     constructor() {
         this._next = 'input';
+        this._data = undefined;
     }
 
     /**
@@ -64,9 +63,8 @@ class Element {
                 } else if(this._next === 'output') {
                     this._next = 'done';
                     return { 'value': this.output(), 'done': true };
-                } else if(this._next === 'done') {
-                    return { 'value': undefined, 'done': true };
                 }
+                return { 'value': undefined, 'done': true };
             }
         };
     }

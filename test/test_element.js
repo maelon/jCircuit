@@ -33,16 +33,24 @@ describe('_run normal', function() {
     var o = new TElement();
     var go = o._run();
     it('test input', function() {
-        assert.deepEqual({ value: true, done: false }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: true, done: false }, value);
+        });
     });
     it('test process', function() {
-        assert.deepEqual({ value: undefined, done: false }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: false }, value);
+        });
     });
     it('test output', function() {
-        assert.deepEqual({ value: undefined, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: true }, value);
+        });
     });
     it('test go on', function() {
-        assert.deepEqual({ value: undefined, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: true }, value);
+        });
     });
 });
 
@@ -62,15 +70,23 @@ describe('_run abnormal', function() {
     var o = new TElement();
     var go = o._run();
     it('test input', function() {
-        assert.deepEqual({ value: false, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: false, done: true }, value);
+        });
     });
     it('test process', function() {
-        assert.deepEqual({ value: undefined, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: true }, value);
+        });
     });
     it('test output', function() {
-        assert.deepEqual({ value: undefined, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: true }, value);
+        });
     });
     it('test go on', function() {
-        assert.deepEqual({ value: undefined, done: true }, go.next());
+        go.next().then(function(value) {
+            assert.deepEqual({ value: undefined, done: true }, value);
+        });
     });
 });

@@ -21,13 +21,15 @@ class Element {
      */
     constructor() {
         this._next = 'input';
-        this._data = undefined;
+
+        this._data_source = undefined;
+        this._data_result = undefined;
     }
 
     /**
      * @abstract
      * @param {*} data - The input data.
-     * @return {boolean} - Return true will enter next process or not will break.
+     * @return {Promise|boolean} - Return true will enter next process or not will break or a promise.
      * @description The entry of the element.
      * return Element;
      */
@@ -45,27 +47,57 @@ class Element {
 
     /**
      * @abstract
-     * @return {*} data - The output data.
+     * @return {Promise|*} data - Return the output data.
      */
     output() {
         throw new Error('must be implemented by subclass!');
+    }
+
+    set dataSource(data) {
+        this._data_source = data;
+    }
+
+    get dataSource() {
+        return this._data_source;
+    }
+
+    set dataResult(data) {
+        this._data_result = data;
+    }
+
+    get dataResult() {
+        return this._data_result;
     }
 
     _run() {
         return {
             'next': () => {
                 if(this._next === 'input') {
-                    const whether = this.input(...arguments);
-                    this._next = whether ? 'process' : 'done';
-                    return { 'value': whether, 'done': !whether };
+                    const ret = this.input(...arguments);
+                    return new Promise((resolve, reject) => {
+                        Promise.resolve(ret).then(ipt => {
+                            this._next = whether ? 'process' : 'done';
+                            resolve({ 'value': ipt, 'done': !whether });
+                        });
+                    });
                 } else if(this._next === 'process') {
-                    this._next = 'output';
-                    return { 'value': this.process(), 'done': false };
+                    const ret = this.process();
+                    return new Promise((resolve, reject) => {
+                        Promise.resolve(ret).then(() => {
+                            this._next = 'output';
+                            resolve({ 'value': undefined, 'done': false });
+                        });
+                    });
                 } else if(this._next === 'output') {
-                    this._next = 'done';
-                    return { 'value': this.output(), 'done': true };
+                    const ret = this.output();
+                    return new Promise((resolve, reject) => {
+                        Promise.resolve(ret).then(opt => {
+                            this._next = 'done';
+                            resolve({ 'value': opt, 'done': true });
+                        });
+                    });
                 }
-                return { 'value': undefined, 'done': true };
+                return Promise.resolve({ 'value': undefined, 'done': true });
             }
         };
     }

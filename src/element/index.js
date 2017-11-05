@@ -29,6 +29,7 @@ class Element {
      * @param {*} data - The input data.
      * @return {boolean} - Return true will enter next process or not will break.
      * @description The entry of the element.
+     * return Element;
      */
     input(data) {
         throw new Error('must be implemented by subclass!');

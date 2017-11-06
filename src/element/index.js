@@ -6,6 +6,8 @@
 # Description: The base unit of jCircuit.
 ===================================================================*/
 
+import IElement from 'element/interface';
+
 /**
  * The base unit of a circuit.
  * It's composed of input, output and process, like a electrical element.
@@ -14,7 +16,7 @@
  * The output is called by process when it is done.
  * @class
  */
-class Element {
+class Element extends IElement {
     /**
      * Create an element.
      * @constructor
@@ -27,29 +29,25 @@ class Element {
     }
 
     /**
-     * @abstract
      * @param {*} data - The input data.
      * @return {Promise|boolean} - Return true will enter next process or not will break or a promise.
-     * @description The entry of the element.
+     * @description The entry of the element. At last, you should call setter function dataSource to save input data;
      */
     input(data) {
-        throw new Error('must be implemented by subclass!');
     }
 
     /**
-     * @abstract
      * @return {Promise|undefined} - Return a promise object for asynchronous process or undefined for synchronous.
+     * @description In this, you can call getter function dataSource to get input data. At last, you should also call setter function dataResult to save processed data.
      */
     process() {
-        throw new Error('must be implemented by subclass!');
     }
 
     /**
-     * @abstract
      * @return {Promise|*} data - Return the output data.
+     * @description In this, you can call getter function dataResult to get processed data. At last, you should return the filnal data.
      */
     output() {
-        throw new Error('must be implemented by subclass!');
     }
 
     set dataSource(data) {

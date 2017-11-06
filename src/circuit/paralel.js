@@ -3,30 +3,35 @@
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
 #  CreateTime: 2017-10-13 12:19
+# Description: Extend the base class Circuit.
 ===================================================================*/
 
 import Circuit from 'circuit/index';
 
-class ParalelCircuit extends Circuit {
+/**
+* Parallelly process the stored elements.
+* @class
+*/
+class ParallelCircuit extends Circuit {
+
+    /**
+    * @constructor
+    */
     constructor() {
         super();
-
-        this._elements = undefined;
     }
 
-    input(data) {
-        throw new Error('must be implemented by subclass!');
-    }
-
+    /**
+    * @description Process elements stored in parallel.
+    */
     process() {
+        
     }
 
-    output() {
-        throw new Error('must be implemented by subclass!');
-    }
-
-    append(elements) {
+    _processElement(element) {
+        const processor = element._run();
+        //processor.next().then(ret => );
     }
 }
 
-export default ParalelCircuit;
+export default ParallelCircuit;

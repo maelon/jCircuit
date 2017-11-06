@@ -1,34 +1,53 @@
 /*===================================================================
-#    FileName: circuit/index.js
+#    FileName: index.js
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
-#  CreateTime: 2017-09-29 11:32
-# Description: A circuit consist of some elements or circuits.
-               It extends element, but has more features: serial and parallel flow.
-               So, it has one input, output and process in the same way.
+#  CreateTime: 2017-11-06 10:33
+# Description: The base class of circuit.
 ===================================================================*/
 
 import Element from 'element/index';
 
+/**
+* The base circuit class.
+* Circuit extends Element.
+*/
 class Circuit extends Element {
+    /**
+    * @constructor
+    */
     constructor() {
         super();
+
+        this._elements = undefined;
     }
 
-    input(data) {
-        throw new Error('must be implemented by subclass!');
-    }
-
-    process() {
-        throw new Error('must be implemented by subclass!');
-    }
-
-    output() {
-        throw new Error('must be implemented by subclass!');
-    }
-
+    /**
+    * Append Elements.
+    * @param {Element|Array<Element>} Elements needed to append.
+    * @description You shoud append instance implements IElement, or return false.
+    */
     append(elements) {
-        throw new Error('must be implemented by subclass!');
+        if(this._checkElementExtended(elements)) {
+            Array.isArray(elements) ? this._elements.push(...elements) : this._elements.push(elements);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * @description The getter function to get stored elements.
+    */
+    get elements() {
+        return this._elements;
+    }
+
+    _checkElementExtended(elements) {
+        if(Array.isArray(elements)) {
+            return elements.every(element => element instanceof Element);
+        } else {
+            return elements instanceof Element;
+        }
     }
 }
 

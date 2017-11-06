@@ -2,16 +2,12 @@
 #    FileName: element/interface.js
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
-#  CreateTime: 2017-11-05 11:43
-# Description: interface for element
+#  CreateTime: 2017-11-06 09:51
+# Description: The interface of element.
 ===================================================================*/
 
 /**
- * The base unit of a circuit.
- * It's composed of input, output and process, like a electrical element.
- * One element only contains one input, and one output, and one process.
- * The input starts process.
- * The output is called by process when it is done.
+ * The interface of element
  * @class
  */
 class Interface {
@@ -21,7 +17,6 @@ class Interface {
      * @param {*} data - The input data.
      * @return {Promise|boolean} - Return true will enter next process or not will break or a promise.
      * @description The entry of the element.
-     * return Element;
      */
     input(data) {
         throw new Error('must be implemented by subclass!');

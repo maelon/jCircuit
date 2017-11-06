@@ -76,8 +76,8 @@ class Element {
                     const ret = this.input(...arguments);
                     return new Promise((resolve, reject) => {
                         Promise.resolve(ret).then(ipt => {
-                            this._next = whether ? 'process' : 'done';
-                            resolve({ 'value': ipt, 'done': !whether });
+                            this._next = ret ? 'process' : 'done';
+                            resolve({ 'value': ipt, 'done': !ret });
                         });
                     });
                 } else if(this._next === 'process') {

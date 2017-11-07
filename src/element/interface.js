@@ -32,7 +32,7 @@ class Interface {
 
     /**
      * @abstract
-     * @return {Promise|*} data - Return the output data.
+     * @return {Promise|*} - Return the output data.
      */
     output() {
         throw new Error('must be implemented by subclass!');

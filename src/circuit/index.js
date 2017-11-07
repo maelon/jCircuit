@@ -16,8 +16,8 @@ class Circuit extends Element {
     /**
     * @constructor
     */
-    constructor() {
-        super();
+    constructor(name) {
+        super(name);
 
         this._elements = undefined;
     }
@@ -48,6 +48,29 @@ class Circuit extends Element {
         } else {
             return elements instanceof Element;
         }
+    }
+
+    _processElement(element, ipt_data) {
+        return new Promise((resolve, reject) => {
+            try {
+                const ret_ipt = element.input(ipt_data);
+                Promise.resolve(ret_ipt).then(ipt => {
+                    if(ipt) {
+                        const ret_pcs = element.process();
+                        Promise.resolve(ret_pcs).then(() => {
+                            const ret_opt = element.output();
+                            Promise.resolve(ret_opt).then(opt => {
+                                resolve(opt);
+                            });
+                        });
+                    } else {
+                        resolve(MSGEnum.ELEMENT_INPUT_REJECT);
+                    }
+                });
+            } catch(e) {
+                reject(ErrorEnum.ELEMENT_ERROR);
+            }
+        });
     }
 }
 

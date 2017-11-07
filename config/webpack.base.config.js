@@ -37,7 +37,9 @@ const config = {
         alias: {
             'element': path.resolve(__dirname, '../src/element'),
             'circuit': path.resolve(__dirname, '../src/circuit'),
+            'line': path.resolve(__dirname, '../src/line'),
             'utils': path.resolve(__dirname, '../src/utils'),
+            'const': path.resolve(__dirname, '../src/const'),
             'only-module$': 'new-module',
             'module': path.resolve(__dirname, 'app/third/module.js'),
         }

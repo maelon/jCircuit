@@ -7,6 +7,7 @@
 ===================================================================*/
 
 import IElement from 'element/interface';
+import utils from 'utils';
 
 /**
  * The base unit of a circuit.
@@ -21,11 +22,13 @@ class Element extends IElement {
      * Create an element.
      * @constructor
      */
-    constructor() {
-        this._next = 'input';
+    constructor(name) {
+        super();
 
-        this._data_source = undefined;
-        this._data_result = undefined;
+        this._name = name.toString();
+        this._data_input = undefined;
+        this._data_process = undefined;
+        this._data_output = undefined;
     }
 
     /**
@@ -50,53 +53,35 @@ class Element extends IElement {
     output() {
     }
 
-    set dataSource(data) {
-        this._data_source = data;
+    /**
+    * @return {string} - Return the name of the element.
+    */
+    get elementName() {
+        return this._name;
     }
 
-    get dataSource() {
-        return this._data_source;
+    saveInputData(data) {
+        this._data_input = data;
     }
 
-    set dataResult(data) {
-        this._data_result = data;
+    getInputData() {
+        return utils.clone(this._data_input);
     }
 
-    get dataResult() {
-        return this._data_result;
+    saveProcessData(data) {
+        this._data_process = data;
     }
 
-    _run() {
-        return {
-            'next': () => {
-                if(this._next === 'input') {
-                    const ret = this.input(...arguments);
-                    return new Promise((resolve, reject) => {
-                        Promise.resolve(ret).then(ipt => {
-                            this._next = ret ? 'process' : 'done';
-                            resolve({ 'value': ipt, 'done': !ret });
-                        });
-                    });
-                } else if(this._next === 'process') {
-                    const ret = this.process();
-                    return new Promise((resolve, reject) => {
-                        Promise.resolve(ret).then(() => {
-                            this._next = 'output';
-                            resolve({ 'value': undefined, 'done': false });
-                        });
-                    });
-                } else if(this._next === 'output') {
-                    const ret = this.output();
-                    return new Promise((resolve, reject) => {
-                        Promise.resolve(ret).then(opt => {
-                            this._next = 'done';
-                            resolve({ 'value': opt, 'done': true });
-                        });
-                    });
-                }
-                return Promise.resolve({ 'value': undefined, 'done': true });
-            }
-        };
+    getProcessData() {
+        return utils.clone(this._data_process);
+    }
+
+    saveOutputData(data) {
+        this._data_output = data;
+    }
+
+    getOutputData() {
+        return utils.clone(this._data_output);
     }
 }
 

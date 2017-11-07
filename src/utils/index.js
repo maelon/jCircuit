@@ -7,8 +7,17 @@
 ===================================================================*/
 
 const utils = {
-    r2Promise(result) {
-        return Promise.resolve(result);
+    clone (obj) {
+        if (typeof obj == "function" || Object(obj) !== obj) {
+            return obj;
+        }
+        const res = new obj.constructor();
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                res[key] = this.clone(obj[key]);
+            }
+        }
+        return res;
     }
 };
 

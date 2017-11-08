@@ -8,6 +8,10 @@
 
 class MSGEnum {
 
+    static get NO_VALUE() {
+        return 'no_value';
+    }
+
     static get LINE_SWITCH_OFF() {
         return 'line_switch_off';
     }

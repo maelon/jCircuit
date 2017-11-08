@@ -7,6 +7,8 @@
 ===================================================================*/
 
 import IElement from 'element/interface';
+
+import MSG_SIGNAL from 'const/index';
 import utils from 'utils';
 
 /**
@@ -26,9 +28,9 @@ class Element extends IElement {
         super();
 
         this._name = name.toString();
-        this._data_input = undefined;
-        this._data_process = undefined;
-        this._data_output = undefined;
+        this._data_input = MSG_SIGNAL.NO_VALUE;
+        this._data_process = MSG_SIGNAL.NO_VALUE;
+        this._data_output = MSG_SIGNAL.NO_VALUE;
     }
 
     /**
@@ -72,6 +74,9 @@ class Element extends IElement {
     * @return {Object} data - Return the treated input data.
     */
     getInputData() {
+        if(this._data_input === MSG_SIGNAL.NO_VALUE) {
+            throw new Error(ERROR_SIGNAL.GETDATA_INPUT_ERROR);
+        }
         return utils.clone(this._data_input);
     }
 
@@ -87,6 +92,9 @@ class Element extends IElement {
     * @return {Object} data - Return the treated process data.
     */
     getProcessData() {
+        if(this._data_process === MSG_SIGNAL.NO_VALUE) {
+            throw new Error(ERROR_SIGNAL.GETDATA_PROCESS_ERROR);
+        }
         return utils.clone(this._data_process);
     }
 
@@ -102,6 +110,9 @@ class Element extends IElement {
     * @return {Object} data - Return the treated output data.
     */
     getOutputData() {
+        if(this._data_output === MSG_SIGNAL.NO_VALUE) {
+            throw new Error(ERROR_SIGNAL.GETDATA_OUTPUT_ERROR);
+        }
         return utils.clone(this._data_output);
     }
 }

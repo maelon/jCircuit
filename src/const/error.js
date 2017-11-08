@@ -8,6 +8,18 @@
 
 class ErrorEnum {
 
+    static get GETDATA_INPUT_ERROR() {
+        return 'you should call function saveInputData in function input first!';
+    }
+
+    static get GETDATA_PROCESS_ERROR() {
+        return 'you should call function saveProcessData in function process first!';
+    }
+
+    static get GETDATA_OUTPUT_ERROR() {
+        return 'you should call function saveOutputData in function output first!';
+    }
+
     static get ELEMENT_ERROR() {
         return 'when execute element, error happened!';
     }

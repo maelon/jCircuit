@@ -1,5 +1,5 @@
 /*===================================================================
-#    FileName: paralel.js
+#    FileName: parallel.js
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
 #  CreateTime: 2017-10-13 12:19
@@ -8,8 +8,8 @@
 
 import Circuit from 'circuit/index';
 
-import MSGEnum from 'const/index';
-import ErrorEnum from 'const/error';
+import MSG_SIGNAL from 'const/index';
+import ERROR_SIGNAL from 'const/error';
 
 /**
 * Parallelly process the stored elements.
@@ -42,9 +42,9 @@ class ParallelCircuit extends Circuit {
             if(data.length == this.elements.length) {
                 super.saveInputData(data);
             }
-            throw new Error(ErrorEnum.PARALLELCIRCUIT_INPUT_DATA_ARRAY_LENGTH);
+            throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_INPUT_DATA_ARRAY_LENGTH);
         } 
-        throw new Error(ErrorEnum.PARALLELCIRCUIT_INPUT_DATA_ARRAY_TYPE);
+        throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_INPUT_DATA_ARRAY_TYPE);
     }
 
     saveProcessData(data) {
@@ -52,9 +52,9 @@ class ParallelCircuit extends Circuit {
             if(data.length == this.elements.length) {
                 super.saveProcessData(data);
             }
-            throw new Error(ErrorEnum.PARALLELCIRCUIT_PROCESS_DATA_ARRAY_LENGTH);
+            throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_PROCESS_DATA_ARRAY_LENGTH);
         } 
-        throw new Error(ErrorEnum.PARALLELCIRCUIT_PROCESS_DATA_ARRAY_TYPE);
+        throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_PROCESS_DATA_ARRAY_TYPE);
     }
 
     saveOutputData(data) {
@@ -62,9 +62,9 @@ class ParallelCircuit extends Circuit {
             if(data.length == this.elements.length) {
                 super.saveOutputData(data);
             }
-            throw new Error(ErrorEnum.PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_LENGTH);
+            throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_LENGTH);
         } 
-        throw new Error(ErrorEnum.PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_TYPE);
+        throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_TYPE);
     }
 }
 

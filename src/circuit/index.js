@@ -8,7 +8,8 @@
 
 import Element from 'element/index';
 
-import ErrorEnum from 'const/error';
+import MSG_SIGNAL from 'const/index';
+import ERROR_SIGNAL from 'const/error';
 
 /**
 * The base circuit class.
@@ -66,11 +67,11 @@ class Circuit extends Element {
                             });
                         });
                     } else {
-                        resolve(MSGEnum.ELEMENT_INPUT_REJECT);
+                        resolve(MSG_SIGNAL.ELEMENT_INPUT_REJECT);
                     }
                 });
             } catch(e) {
-                reject(ErrorEnum.ELEMENT_ERROR);
+                reject(ERROR_SIGNAL.ELEMENT_ERROR);
             }
         });
     }

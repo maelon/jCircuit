@@ -8,7 +8,7 @@
 
 import Circuit from 'circuit/index';
 
-import MSGEnum from 'const/index';
+import MSG_SIGNAL from 'const/index';
 
 /**
 * Serially process the stored elements.
@@ -32,7 +32,7 @@ class SerialCircuit extends Circuit {
         let elements_promise = Promise.resolve(data);
         for(let i = 0; i < elements.length; i++) {
             elements_promise = elements_promise.then((ret, name) => {
-                if(ret === MSGEnum.ELEMENT_INPUT_REJECT) {
+                if(ret === MSG_SIGNAL.ELEMENT_INPUT_REJECT) {
                     return Promise.resolve(ret, name || elements[i].elementName);
                 }
                 return  this._processElement(elements[i], ret);

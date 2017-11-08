@@ -9,6 +9,7 @@
 import IElement from 'element/interface';
 
 import MSG_SIGNAL from 'const/index';
+import ERROR_SIGNAL from 'const/error';
 import utils from 'utils';
 
 /**
@@ -27,7 +28,7 @@ class Element extends IElement {
     constructor(name) {
         super();
 
-        this._name = name.toString();
+        this._name = String(name);
         this._data_input = MSG_SIGNAL.NO_VALUE;
         this._data_process = MSG_SIGNAL.NO_VALUE;
         this._data_output = MSG_SIGNAL.NO_VALUE;

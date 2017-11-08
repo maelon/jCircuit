@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "test_element": "mocha ./test/test_element.js",
     "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
     "build": "webpack --config ./config/webpack.prod.config.js"
   },

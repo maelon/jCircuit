@@ -17,6 +17,7 @@ class Line extends ICircuit {
     /**
     * @param {string} flag - 'on' will start to process the line, 'off' will stop the line immediately.
     * @param {Object} data - The initial data.
+    * @return {boolean} - Whether witch success.
     */
     switch(flag, data) {
         throw new Error('must be implemented by subclass!');

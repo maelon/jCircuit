@@ -60,26 +60,47 @@ class Element extends IElement {
         return this._name;
     }
 
+    /**
+    * @param {Object} data - The data to be saved.
+    * @description At the last of input, should call this to save treated data.
+    */
     saveInputData(data) {
         this._data_input = data;
     }
 
+    /**
+    * @return {Object} data - Return the treated input data.
+    */
     getInputData() {
         return utils.clone(this._data_input);
     }
 
+    /**
+    * @param {Object} data - The data to be saved.
+    * @description At the last of process, should call this to save treated process data.
+    */
     saveProcessData(data) {
         this._data_process = data;
     }
 
+    /**
+    * @return {Object} data - Return the treated process data.
+    */
     getProcessData() {
         return utils.clone(this._data_process);
     }
 
+    /**
+    * @param {Object} data - The data to be saved.
+    * @description At the last of output, should call this to save treated output data.
+    */
     saveOutputData(data) {
         this._data_output = data;
     }
 
+    /**
+    * @return {Object} data - Return the treated output data.
+    */
     getOutputData() {
         return utils.clone(this._data_output);
     }

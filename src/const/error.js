@@ -35,6 +35,10 @@ class ErrorEnum {
     static get PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_LENGTH() {
         return 'error length of parallel circuit output data, it equals length of elements!';
     }
+
+    static get LINE_EXECUTE_ERROR() {
+        return 'when execute line, error happened';
+    }
 }
 
 export default ErrorEnum;

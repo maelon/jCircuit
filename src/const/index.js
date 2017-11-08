@@ -1,5 +1,5 @@
 /*===================================================================
-#    FileName: index.js
+#    FileName: const/index.js
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
 #  CreateTime: 2017-11-07 14:45
@@ -7,6 +7,14 @@
 ===================================================================*/
 
 class MSGEnum {
+
+    static get LINE_SWITCH_OFF() {
+        return 'line_switch_off';
+    }
+
+    static get CIRCUIT_BREAK() {
+        return 'circuit_break';
+    }
 
     static get ELEMENT_INPUT_REJECT() {
         return 'element_input_reject';

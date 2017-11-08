@@ -1,5 +1,5 @@
 /*===================================================================
-#    FileName: index.js
+#    FileName: circuit/index.js
 #      Author: Maelon.J
 #       Email: maelon.j@gmail.com
 #  CreateTime: 2017-11-06 10:33
@@ -7,6 +7,8 @@
 ===================================================================*/
 
 import Element from 'element/index';
+
+import ErrorEnum from 'const/error';
 
 /**
 * The base circuit class.

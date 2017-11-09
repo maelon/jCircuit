@@ -32,6 +32,7 @@ class Circuit extends Element {
     */
     append(elements) {
         if(this._checkElementExtended(elements)) {
+            this._elements = this._elements || [];
             Array.isArray(elements) ? this._elements.push(...elements) : this._elements.push(elements);
             return true;
         }

@@ -41,6 +41,7 @@ class ParallelCircuit extends Circuit {
         if(Array.isArray(data)) {
             if(data.length == this.elements.length) {
                 super.saveInputData(data);
+                return ;
             }
             throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_INPUT_DATA_ARRAY_LENGTH);
         } 
@@ -51,6 +52,7 @@ class ParallelCircuit extends Circuit {
         if(Array.isArray(data)) {
             if(data.length == this.elements.length) {
                 super.saveProcessData(data);
+                return ;
             }
             throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_PROCESS_DATA_ARRAY_LENGTH);
         } 
@@ -61,6 +63,7 @@ class ParallelCircuit extends Circuit {
         if(Array.isArray(data)) {
             if(data.length == this.elements.length) {
                 super.saveOutputData(data);
+                return ;
             }
             throw new Error(ERROR_SIGNAL.PARALLELCIRCUIT_OUTPUT_DATA_ARRAY_LENGTH);
         } 

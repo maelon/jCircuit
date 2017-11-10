@@ -38,6 +38,10 @@ class Line extends ILine {
         return false;
     }
 
+    append(elements) {
+        return super.append(elements);
+    }
+
     /**
     * @description Process elements stored in serial.
     */

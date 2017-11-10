@@ -7,15 +7,17 @@
 ===================================================================*/
 
 import Element from 'element/index';
+import ICircuit from 'circuit/interface';
 
 import MSG_SIGNAL from 'const/index';
 import ERROR_SIGNAL from 'const/error';
+import utils from 'utils';
 
 /**
 * The base circuit class.
 * Circuit extends Element.
 */
-class Circuit extends Element {
+class Circuit extends utils.MixinInterface(Element, ICircuit) {
     /**
     * @constructor
     */

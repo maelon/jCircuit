@@ -35,7 +35,20 @@ const utils = {
                 cls_proto[key] = cls.prototype[key];
             }
         });
-        return Object.create(Object.assign({}, cls_proto, itf_proto));
+        const NewCls = function() {};
+        const NewProto = Object.assign({}, cls_proto, itf_proto);
+        NewCls.prototype = Object.create(NewProto, { 
+            constructor: { 
+                value: cls.prototype.constructor,
+                enumerable: false,
+                writable: true,
+                configurable: true 
+            }
+        });
+        if(NewProto) {
+            Object.setPrototypeOf ? Object.setPrototypeOf(NewCls, NewProto) : subClass.__proto__ = NewProto; 
+        }
+        return NewCls;
     }
 };
 

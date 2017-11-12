@@ -5,12 +5,14 @@
 #  CreateTime: 2017-11-08 10:12
 ===================================================================*/
 
+import Circuit from 'circuit/index';
 import ILine from 'line/interface';
 
 import MSG_SIGNAL from 'const/index';
 import ERROR_SIGNAL from 'const/error';
+import utils from 'utils/index';
 
-class Line extends ILine {
+class Line extends utils.MixinInterface(Circuit, ILine) {
 
     /**
     * @constructor

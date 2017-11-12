@@ -84,7 +84,7 @@ describe('test line', function() {
         process() {
             const ipt_data = this.getInputData();
             return new Promise((resolve, reject) => {
-                setTimout(() => {
+                setTimeout(() => {
                     this.saveProcessData(ipt_data.reduce((a, b) => a * b));
                     resolve();
                 }, 1000);
@@ -104,7 +104,7 @@ describe('test line', function() {
         p.append([new TAddElement('p_add'), new TAddElement('p_multi')]);
         line.append([s, p]);
         line.switch('on', 1);
-        setTimout(() => {
+        setTimeout(() => {
             assert.deepEqual(line.output(), [5, 8]);
         });
     });

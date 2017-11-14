@@ -111,7 +111,7 @@ describe('test line', function() {
                                                                                                 |(input process output)|
     ***/
     //switch on
-    it('output should return [5, 8], when add 1 and multi 2 process overs.', function(done) {
+    it('output should return [5, 8], when switch on that add 1 and multi 2 process overs.', function(done) {
         const line = new TLine('test');
         const s = new TSCircuit();
         s.append([new TAddElement('s_add'), new TMultiElement('s_multi')]);

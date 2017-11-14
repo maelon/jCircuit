@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha ./test/element.test.js ./test/circuit.test.js ./test/line.test.js",
     "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
     "build": "webpack --config ./config/webpack.prod.config.js"
   },

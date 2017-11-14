@@ -20,8 +20,8 @@ class ParallelCircuit extends Circuit {
     /**
     * @constructor
     */
-    constructor() {
-        super();
+    constructor(name) {
+        super(name);
     }
 
     /**

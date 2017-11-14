@@ -13,6 +13,14 @@ describe('test line', function() {
             this.saveInputData(data);
             return true;
         }
+        process() {
+            return super.process().then(result => {
+                this.saveProcessData(result);
+            });
+        }
+        output() {
+            return this.getProcessData();
+        }
     }
 
     class TPCircuit extends jCircuit.ParallelCircuit {
@@ -25,7 +33,6 @@ describe('test line', function() {
         }
         process() {
             return super.process().then(result => {
-                console.log('PCircuit process ok', result);
                 this.saveProcessData(result);
             });
         }
@@ -44,7 +51,6 @@ describe('test line', function() {
         }
         process() {
             return super.process().then(result => {
-                console.log('SCircuit process ok', result);
                 this.saveProcessData(result);
             });
         }
@@ -67,7 +73,7 @@ describe('test line', function() {
                 setTimeout(() => {
                     this.saveProcessData(ipt_data.reduce((a, b) => a + b));
                     resolve();
-                }, 1000);
+                }, 200);
             });
         }
         output() {
@@ -89,7 +95,7 @@ describe('test line', function() {
                 setTimeout(() => {
                     this.saveProcessData(ipt_data.reduce((a, b) => a * b));
                     resolve();
-                }, 1000);
+                }, 300);
             });
         }
         output() {
@@ -97,8 +103,15 @@ describe('test line', function() {
         }
     }
 
+    /***
+    |----------------------------------------------------------------line----------------------------------------------------------------|
+                 |-----------------------------serial---------------------------------|-----------------parallel------------------|
+                           |-------------------process---------------------|                    |-------process--------|
+    switch input | input---|(input process output)---(input process output)|---output | input---|(input process output)|---output | output
+                                                                                                |(input process output)|
+    ***/
     //switch on
-    it('getOutputData should return [5, 8], when add 1 and multi 2 process overs.', function(done) {
+    it('output should return [5, 8], when add 1 and multi 2 process overs.', function(done) {
         const line = new TLine('test');
         const s = new TSCircuit();
         s.append([new TAddElement('s_add'), new TMultiElement('s_multi')]);
@@ -109,11 +122,22 @@ describe('test line', function() {
         setTimeout(() => {
             assert.deepEqual(line.output(), [5, 8]);
             done();
-        }, 5000);
+        }, 1500);
     });
 
     //switch off
-    //it('getInputData should return 1, when input width param 1', function() {
-        //assert.strictEqual(el.getInputData(), 1);
-    //});
+    it('output should return MSG_SIGNAL.LINE_SWITCH_OFF, when switch off', function() {
+        const line = new TLine('test');
+        const s = new TSCircuit();
+        s.append([new TAddElement('s_add'), new TMultiElement('s_multi')]);
+        const p = new TPCircuit();
+        p.append([new TAddElement('p_add'), new TMultiElement('p_multi')]);
+        line.append([s, p]);
+        line.switch('on', 1);
+        setTimeout(() => {
+            line.switch('off');
+            assert.deepEqual(line.output(), jCircuit.MSG_SIGNAL.LINE_SWITCH_OFF);
+            done();
+        }, 500);
+    });
 });

@@ -27,10 +27,7 @@ class Line extends utils.MixinInterface(Circuit, ILine) {
         if(['on', 'off'].includes(flag)) {
             if(flag != this._switch_state) {
                 if(flag === 'on') {
-                    this._processElement(this, data).then(ret => {
-                        console.log('line over', ret);
-                        this.saveProcessData(ret);
-                    }).catch(error => {
+                    this._processElement(this, data).catch(error => {
                         if(error === ERROR_SIGNAL.ELEMENT_ERROR) {
                             console.log(ERROR_SIGNAL.LINE_EXECUTE_ERROR);
                         }
@@ -56,7 +53,6 @@ class Line extends utils.MixinInterface(Circuit, ILine) {
         let elements_promise = Promise.resolve(data);
         for(let i = 0; i < elements.length; i++) {
             elements_promise = elements_promise.then((ret, name) => {
-                console.log('line process',i , ret, name);
                 if(ret === MSG_SIGNAL.LINE_SWITCH_OFF || this._switch_state === 'off') {
                     return Promise.resolve(MSG_SIGNAL.LINE_SWITCH_OFF);
                 }

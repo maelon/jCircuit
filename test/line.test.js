@@ -20,11 +20,12 @@ describe('test line', function() {
             super('pcircuit');
         }
         input(data) {
-            this.saveInputData(data);
+            this.saveInputData([data, data]);
             return true;
         }
         process() {
             return super.process().then(result => {
+                console.log('PCircuit process ok', result);
                 this.saveProcessData(result);
             });
         }
@@ -43,6 +44,7 @@ describe('test line', function() {
         }
         process() {
             return super.process().then(result => {
+                console.log('SCircuit process ok', result);
                 this.saveProcessData(result);
             });
         }
@@ -56,7 +58,7 @@ describe('test line', function() {
             super(name || 'add');
         }
         input(data) {
-            this.saveInputData(data);
+            this.saveInputData([data, 1]);
             return true;
         }
         process() {
@@ -78,7 +80,7 @@ describe('test line', function() {
             super(name || 'multi');
         }
         input(data) {
-            this.saveInputData(data);
+            this.saveInputData([data, 2]);
             return true;
         }
         process() {
@@ -99,14 +101,15 @@ describe('test line', function() {
     it('getOutputData should return [5, 8], when add 1 and multi 2 process overs.', function(done) {
         const line = new TLine('test');
         const s = new TSCircuit();
-        s.append([new TAddElement('s_add'), new TAddElement('s_multi')]);
+        s.append([new TAddElement('s_add'), new TMultiElement('s_multi')]);
         const p = new TPCircuit();
-        p.append([new TAddElement('p_add'), new TAddElement('p_multi')]);
+        p.append([new TAddElement('p_add'), new TMultiElement('p_multi')]);
         line.append([s, p]);
         line.switch('on', 1);
         setTimeout(() => {
             assert.deepEqual(line.output(), [5, 8]);
-        });
+            done();
+        }, 5000);
     });
 
     //switch off

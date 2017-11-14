@@ -21,34 +21,18 @@ const utils = {
     },
 
     MixinInterface(cls, itf) {
-        const itf_proto = {};
+        class MixinClass extends cls {
+            constructor() {
+                super(...arguments);
+            }
+        }
         const itf_protoKeys = Object.getOwnPropertyNames(itf.prototype);
         itf_protoKeys.forEach(key => {
             if(key !== 'constructor') {
-                itf_proto[key] = itf.prototype[key];
+                Object.defineProperty(MixinClass.prototype, key, Object.getOwnPropertyDescriptor(itf.prototype, key));
             }
         });
-        const cls_proto = {};
-        const cls_protoKeys = Object.getOwnPropertyNames(cls.prototype);
-        cls_protoKeys.forEach(key => {
-            if(key !== 'constructor') {
-                cls_proto[key] = cls.prototype[key];
-            }
-        });
-        const NewCls = function() {};
-        const NewProto = Object.assign({}, cls_proto, itf_proto);
-        NewCls.prototype = Object.create(NewProto, { 
-            constructor: { 
-                value: cls.prototype.constructor,
-                enumerable: false,
-                writable: true,
-                configurable: true 
-            }
-        });
-        if(NewProto) {
-            Object.setPrototypeOf ? Object.setPrototypeOf(NewCls, NewProto) : subClass.__proto__ = NewProto; 
-        }
-        return NewCls;
+        return MixinClass;
     }
 };
 

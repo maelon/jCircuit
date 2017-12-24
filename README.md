@@ -42,5 +42,15 @@ An element has three interfaces: `input` `process` `output`.
   This will be called outside to get result of this element.
 
 ### circuit
+Circuit extends element, but has one more interface `append`.  
+There are two types: parallel circuit and serial one.  
+You can append other circuits and elements.  
+
 ### line
+Line extends circuit, but has one more interface `switch`.
+You can pass `on` or `off` to `switch`.
+A line combines some circuits or elements.
+
+See more detail with [wiki](https://github.com/maelon/jCircuit/wiki)
+
 # For developer

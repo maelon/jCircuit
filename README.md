@@ -1,14 +1,13 @@
 # What is jCircuit?
-
 In one word, a little javascript library that works like electronic circuit.  
 There are 3 concepts:  
-* element
+* element  
   The base type of jCircuit.  
   It has some simple special function like an electronic component.
-* circuit
+* circuit  
   It combines some elements and works like a electronic circuit board.
   Most js library should be a circuit.
-* line
+* line  
   It can't work with circuit only.  It would be find that a circuit with eletronic power and you can control it.  
   That is line.
 
@@ -18,7 +17,6 @@ There are 3 concepts:
 ```
 npm install jcircuit
 ```
-
 ```
 import jCircuit from 'jcircuit';
 
@@ -31,15 +29,18 @@ class Lin extends jCircuit.Line
 
 ### element
 An element has three interfaces: `input` `process` `output`.  
-* input(data: Object)
+* input(data: Object)  
   `input` receive a parameter `data`, and should return a boolean value that true will execute process and false will not.  
   So you can determine whether the data processed or not.  
   If not, `output` will return a special signal.
   if true, you should call `this.saveInputData(data)`, thus the next process will receive the initial data.
-* process
+* process  
   This is the feather of element.
   You can get initial data by calling `this.getInputData()`.  
   And you should call `this.saveProcessData(data)` at the end.
-* output
+* output  
   This will be called outside to get result of this element.
+
+### circuit
+### line
 # For developer
